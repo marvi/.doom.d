@@ -60,3 +60,7 @@
 % my custom stuff
 \\usepackage{arev}
 \\usepackage{arevmath}")
+
+(provide '+org)
+
+ ;;; +org.el ends here
