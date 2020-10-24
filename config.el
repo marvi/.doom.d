@@ -23,9 +23,17 @@
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
 (setq
- doom-font (font-spec :family "Iosevka Nerd Font Mono" :size 15 :weight 'regular)
- doom-big-font (font-spec :family "Iosevka Nerd Font Mono" :size 26)
- doom-variable-pitch-font (font-spec :family "Calendas Plus"))
+ doom-font (font-spec :family "Overpass Mono" :size 14 :weight 'regular)
+ doom-big-font (font-spec :family "Overpass Mono" :size 26)
+ doom-variable-pitch-font (font-spec :family "Overpass"))
+
+(defun marvi/emacs-change-font ()
+  "Change font based on available font list."
+  (interactive)
+  (let ((font (ivy-completing-read "font: " (font-family-list))))
+    (setq doom-font (font-spec :family font :size 18)
+          doom-big-font (font-spec :family font :size 24)))
+  (doom/reload-font))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -39,7 +47,6 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
