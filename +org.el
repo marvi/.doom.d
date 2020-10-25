@@ -1,6 +1,8 @@
 ;;; +orgmode.el -*- lexical-binding: t; -*-
 
 
+;; Custom functions
+
 (defun marvi/org-insert-timestamp ()
   "Insert active timestamp at POS."
   (interactive)
@@ -25,16 +27,44 @@
       :desc "Insert date at POS" "d" #'marvi/org-insert-date)
 
 
+;; terminal-notifier for Pomodoro
+(after! org-pomodoro
+  (when (executable-find "terminal-notifier")
+    (defun notify-osx (title message)
+      (call-process "terminal-notifier"
+                    nil 0 nil
+                    "-group" "Emacs"
+                    "-title" title
+                    "-sender" "org.gnu.Emacs"
+                    "-message" message
+                    "-activate" "oeg.gnu.Emacs"))
+    (add-hook 'org-pomodoro-finished-hook
+              (lambda ()
+                (notify-osx "Pomodoro completed!" "Time for a break.")))
+    (add-hook 'org-pomodoro-break-finished-hook
+              (lambda ()
+                (notify-osx "Pomodoro Short Break Finished" "Ready for Another?")))
+    (add-hook 'org-pomodoro-long-break-finished-hook
+              (lambda ()
+                (notify-osx "Pomodoro Long Break Finished" "Ready for Another?")))
+    (add-hook 'org-pomodoro-killed-hook
+              (lambda ()
+                (notify-osx "Pomodoro Killed" "One does not simply kill a pomodoro!")))))
+
+
+;; Good looks!
+
 (custom-set-faces!
-  '(outline-1 :weight extra-bold :height 1.25)
-  '(outline-2 :weight bold :height 1.15)
-  '(outline-3 :weight bold :height 1.12)
-  '(outline-4 :weight semi-bold :height 1.09)
-  '(outline-5 :weight semi-bold :height 1.06)
-  '(outline-6 :weight semi-bold :height 1.03)
+  '(outline-1 :weight semi-bold :height 1.6)
+  '(outline-2 :weight bold :height 1.25)
+  '(outline-3 :weight bold :height 1.0)
+  '(outline-4 :weight semi-bold :height 1.0)
+  '(outline-5 :weight semi-bold :height 1.0)
+  '(outline-6 :weight semi-bold :height 100)
   '(outline-8 :weight semi-bold)
   '(outline-9 :weight semi-bold))
 
+;;; Org Export Stuff
 
 (after! org
   (setq org-highlight-latex-and-related '(native script entities)))
