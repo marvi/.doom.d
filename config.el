@@ -23,8 +23,8 @@
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
 (setq
- doom-font (font-spec :family "Overpass Mono" :size 14 :weight 'regular)
- doom-big-font (font-spec :family "Overpass Mono" :size 26)
+ doom-font (font-spec :family "JetBrains Mono" :size 14 :weight 'regular)
+ doom-big-font (font-spec :family "JetBrains Mono" :size 26)
  doom-variable-pitch-font (font-spec :family "Overpass"))
 
 (defun marvi/emacs-change-font ()
