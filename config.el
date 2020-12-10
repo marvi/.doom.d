@@ -3,6 +3,12 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;; First fix mac modifiers. I like to have Command behave like in Mac apps
+;; Left Option I want as MacOS Option (to write accented characters, curly braces etc.)
+;; Right Option should be Meta. Since I use vim mode I don't need Meta that often.
+(setq mac-option-modifier nil
+      mac-right-command-modifier 'meta)
+
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
