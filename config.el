@@ -28,10 +28,15 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-(setq
- doom-font (font-spec :family "JetBrains Mono" :size 14 :weight 'regular)
- doom-big-font (font-spec :family "JetBrains Mono" :size 26)
- doom-variable-pitch-font (font-spec :family "Overpass"))
+(setq doom-font (font-spec :family "Jetbrains Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "IBM Plex Serif" :size 15)
+      doom-big-font (font-spec :family "Jetbrains Mono" :size 24))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 
 (defun marvi/emacs-change-font ()
   "Change font based on available font list."
