@@ -50,3 +50,6 @@
 ;(unpin! t)
 (package! ox-reveal)
 (package! puppet-mode)
+(package! aggressive-fill-paragraph-mode
+  :recipe
+  (:host github :repo "davidshepherd7/aggressive-fill-paragraph-mode"))
