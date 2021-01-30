@@ -55,6 +55,8 @@
               (lambda ()
                 (notify-osx "Pomodoro Killed" "One does not simply kill a pomodoro!")))))
 
+(use-package! aggressive-fill-paragraph-mode
+  :hook org-mode)
 
 ;; Good looks!
 
