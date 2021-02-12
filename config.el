@@ -82,5 +82,44 @@
 (use-package! company-graphviz-dot
   :after graphviz-dot-mode)
 
+(defun my/name-tab-by-project-or-default ()
+  "Return project name if in a project, or default tab-bar name if not.
+The default tab-bar name uses the buffer name."
+  (let ((project-name (projectile-project-name)))
+    (if (string= "-" project-name)
+        (tab-bar-tab-name-current)
+      (projectile-project-name))))
+
+(setq tab-bar-mode t)
+(setq tab-bar-show nil)
+(setq tab-bar-new-tab-choice "*doom*")
+(setq tab-bar-tab-name-function #'my/name-tab-by-project-or-default)
+
+(after! doom-modeline
+  (doom-modeline-def-segment workspace-name
+  "The current workspace name or number.
+Requires `eyebrowse-mode' or `tab-bar-mode' to be enabled."
+  (when doom-modeline-workspace-name
+    (when-let
+        ((name (cond
+                ((and (bound-and-true-p eyebrowse-mode)
+                      (< 1 (length (eyebrowse--get 'window-configs))))
+                 (assq-delete-all 'eyebrowse-mode mode-line-misc-info)
+                 (when-let*
+                     ((num (eyebrowse--get 'current-slot))
+                      (tag (nth 2 (assoc num (eyebrowse--get 'window-configs)))))
+                   (if (< 0 (length tag)) tag (int-to-string num))))
+                (t
+                 (let* ((current-tab (tab-bar--current-tab))
+                        (tab-index (tab-bar--current-tab-index))
+                        (explicit-name (alist-get 'name current-tab))
+                        (tab-name (alist-get 'name current-tab)))
+                   (if explicit-name tab-name (+ 1 tab-index)))))))
+      (propertize (format " %s " name) 'face
+                  (if (doom-modeline--active)
+                      'doom-modeline-buffer-major-mode
+                    'mode-line-inactive))))))
+
+
 (load! "+org")
 (load! "+bindings")
