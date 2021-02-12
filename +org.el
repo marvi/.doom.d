@@ -193,8 +193,6 @@
 \\urlstyle{same}\n"))
 
 ;;; Stuff for Hugo Site Generator
-(def-package! ox-hugo
-  :after ox)
 
 (provide '+org)
 
