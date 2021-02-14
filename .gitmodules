@@ -1,0 +1,3 @@
+[submodule "lisp/engrave-faces"]
+	path = lisp/engrave-faces
+	url = https://github.com/tecosaur/engrave-faces
