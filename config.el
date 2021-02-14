@@ -82,6 +82,8 @@
 (use-package! company-graphviz-dot
   :after graphviz-dot-mode)
 
+(use-package! lorem-ipsum)
+
 (use-package! nov
   :mode ("\\.epub\\'" . nov-mode)
   :config
