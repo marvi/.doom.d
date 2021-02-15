@@ -1,9 +1,5 @@
 ;;; bindings.el -*- lexical-binding: t; -*-
 
-(map!
- )
-
-
 (map! :leader
       (:prefix-map ("TAB" . "Tabs")
        :desc "Switch tab" "TAB" #'tab-bar-select-tab-by-name
@@ -13,6 +9,9 @@
        :desc "Close tab" "d" #'tab-bar-close-tab
        :desc "Close tab by name" "D" #'tab-bar-close-tab-by-name
        :desc "Close other tabs" "1" #'tab-bar-close-other-tabs))
+
+(map! :leader
+       :desc "Insert Lorem Ipsum text" "i L" #'lorem-ipsum-insert-paragraphs)
 
 (provide '+bindings)
 
